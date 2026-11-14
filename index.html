@@ -54,9 +54,10 @@ a.go{display:block;text-align:center;margin-top:18px;padding:14px;border-radius:
 .reader-bar a{color:var(--accent);font-size:.8em;text-decoration:none}
 .reader-tip{margin:0;padding:8px 16px;font-size:.75em;color:var(--muted);background:var(--soft)}
 .reader iframe{display:block;width:100%;height:80vh;border:0;background:#fff}
-.size{position:fixed;right:16px;bottom:16px;display:flex;gap:6px;z-index:6}
-.size button{font:inherit;font-size:15px;width:44px;height:44px;border-radius:50%;border:1px solid var(--line);
-  background:var(--card);color:var(--ink);box-shadow:0 2px 8px rgba(0,0,0,.12);cursor:pointer}
+header{display:flex;justify-content:space-between;align-items:flex-start;gap:12px}
+.size{display:flex;gap:6px;flex:none}
+.size button{font:inherit;font-size:15px;width:40px;height:40px;border-radius:50%;border:1px solid var(--line);
+  background:var(--card);color:var(--ink);cursor:pointer}
 .copy{font:inherit;font-size:.75em;margin-top:10px;padding:6px 12px;border-radius:8px;border:1px solid var(--line);
   background:transparent;color:var(--muted);cursor:pointer}
 </style>
@@ -64,15 +65,17 @@ a.go{display:block;text-align:center;margin-top:18px;padding:14px;border-radius:
 <body>
 <div class="wrap">
   <header>
+    <div>
     <h1 id="title">一週讀經</h1>
     <p id="sub"></p>
+    </div>
+    <div class="size" aria-label="字體大小">
+      <button type="button" id="smaller" aria-label="字體縮小">A-</button>
+      <button type="button" id="bigger" aria-label="字體放大">A+</button>
+    </div>
   </header>
   <nav id="tabs"></nav>
   <main id="main"></main>
-</div>
-<div class="size" aria-label="字體大小">
-  <button type="button" id="smaller" aria-label="字體縮小">A-</button>
-  <button type="button" id="bigger" aria-label="字體放大">A+</button>
 </div>
 
 <script>
