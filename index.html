@@ -54,21 +54,11 @@ h3{font-size:.9em;margin:20px 0 6px;color:var(--muted);font-weight:600}
 .v{margin:0 0 10px;color:var(--verse);font-family:"BiauKai","DFKai-SB","標楷體","Kaiti TC","Noto Serif TC",serif}
 .v span{display:inline-block;min-width:4.6em;font-family:"PingFang TC","Noto Sans TC","Microsoft JhengHei",sans-serif;
   font-size:.8em;color:var(--accent);font-weight:700}
-.reader{margin-top:16px;background:var(--card);border:1px solid var(--line);border-radius:16px;overflow:hidden}
-.reader-bar{display:flex;justify-content:space-between;align-items:center;padding:12px 16px;border-bottom:1px solid var(--line)}
-.reader-bar b{color:var(--accent);font-size:.9em}
-.reader-bar a{color:var(--accent);font-size:.8em;text-decoration:none}
-.reader iframe{display:block;width:100%;height:calc(100vh - 120px);height:calc(100dvh - 120px);min-height:420px;border:0;background:#fff}
 a.go{display:block;margin-top:16px;padding:16px 18px;border-radius:16px;background:var(--accent);color:var(--accent-ink);
   text-decoration:none;box-shadow:0 4px 14px rgba(122,74,42,.25)}
 .go-t{display:block;font-weight:700;font-size:1.05em}
 .go-t::after{content:" →"}
 .go-s{display:block;font-size:.75em;opacity:.85;margin-top:2px;line-height:1.5}
-.stop{display:flex;gap:10px;align-items:flex-start;padding:10px 16px;background:var(--soft);font-size:.85em;border-bottom:1px solid var(--line)}
-.stop .mk{flex:none;width:24px;height:24px;border-radius:50%;border:2px solid var(--accent);color:var(--accent);
-  display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;background:var(--card)}
-.stop small{display:block;color:var(--muted);font-size:.85em}
-.fallback{display:block;padding:12px 16px;font-size:.8em;color:var(--accent);text-decoration:none;border-top:1px solid var(--line);text-align:center}
 .vs{margin-top:16px}
 .vs h3{margin:0 0 8px}
 header{display:flex;justify-content:space-between;align-items:flex-start;gap:12px}
@@ -234,16 +224,8 @@ function show(i){
       "</div>" +
     "</section>" +
     '<a class="go" href="' + esc(hlUrl(d)) + '">' +
-      '<span class="go-t">開始閱讀今天的範圍</span>' +
-      '<span class="go-s">今天要讀的段落會整段標上顏色，顏色結束就是停的地方</span></a>' +
-    '<section class="reader" id="reader">' +
-      '<div class="reader-bar"><b>今日生命讀經（預覽）</b>' +
-        '<a href="' + esc(hlUrl(d)) + '">全螢幕・標色 ↗</a></div>' +
-      '<div class="stop"><span class="mk">止</span><span>讀到「' + esc(d.hl ? d.hl[1] : d.to) + '」就停' +
-        (d.note ? "<small>" + esc(d.note) + "</small>" : "") + "</span></div>" +
-      '<iframe src="' + esc(d.url) + '" title="生命讀經"></iframe>' +
-      '<a class="fallback" href="' + esc(hlUrl(d)) + '">預覽視窗不會標顏色，要看標好的範圍請點這裡 →</a>' +
-    "</section>";
+      '<span class="go-t">讀今天的生命讀經</span>' +
+      '<span class="go-s">今天的段落會標上顏色，顏色結束就停</span></a>';
   document.getElementById("copy").onclick = function(){
     var text = "Day" + (i+1) + "｜" + d.ref + "\n" + d.verses.map(function(v){return v[0] + "　" + v[1];}).join("\n");
     var btn = this;
