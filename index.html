@@ -63,12 +63,8 @@ a.go{display:block;text-align:center;margin-top:18px;padding:14px;border-radius:
 .reader-bar a{color:var(--accent);font-size:.8em;text-decoration:none}
 .reader iframe{display:block;width:100%;height:calc(100vh - 120px);height:calc(100dvh - 120px);min-height:420px;border:0;background:#fff}
 .fallback{display:block;padding:12px 16px;font-size:.8em;color:var(--accent);text-decoration:none;border-top:1px solid var(--line);text-align:center}
-.vs{margin-top:14px;border-top:1px solid var(--line);padding-top:10px}
-.vs summary{cursor:pointer;color:var(--muted);font-size:.85em;font-weight:600;list-style:none;display:flex;justify-content:space-between}
-.vs summary::-webkit-details-marker{display:none}
-.vs summary span{font-weight:400;color:var(--accent)}
-.vs[open] summary span{visibility:hidden}
-.vs[open] summary{margin-bottom:10px}
+.vs{margin-top:16px}
+.vs h3{margin:0 0 8px}
 header{display:flex;justify-content:space-between;align-items:flex-start;gap:12px}
 .size{display:flex;gap:6px;flex:none}
 .size button{font:inherit;font-size:15px;width:40px;height:40px;border-radius:50%;border:1px solid var(--line);
@@ -219,10 +215,10 @@ function show(i){
           esc(d.to.replace(/^讀到/, "").replace(/為止$/, "")) + "</span></div>" +
         (d.note ? '<div class="note">（' + esc(d.note) + "）</div>" : "") +
       "</div>" +
-      '<details class="vs"><summary>經節（恢復本）<span>' + d.verses.length + " 節・點開</span></summary>" +
+      '<div class="vs"><h3>經節（恢復本）</h3>' +
         verses +
         '<button type="button" class="copy" id="copy">複製經節</button>' +
-      "</details>" +
+      "</div>" +
     "</section>" +
     '<section class="reader" id="reader">' +
       '<div class="reader-bar"><b>今日生命讀經</b>' +
