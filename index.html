@@ -238,8 +238,10 @@ function show(i){
 }
 /* 打開生命讀經時用「文字片段」把今天的範圍整段標色（Chrome、Safari 支援） */
 function hlUrl(d){
-  if (!d.hl) return d.url;
-  return d.url.split("#")[0] + "#:~:text=" +
+  /* openExternalBrowser=1：在 LINE 裡點，會改用手機的 Safari／Chrome 開啟（LINE 內建瀏覽器不支援標示範圍） */
+  var base = d.url.split("#")[0] + "?openExternalBrowser=1";
+  if (!d.hl) return base + (d.url.indexOf("#") >= 0 ? "#" + d.url.split("#")[1] : "");
+  return base + "#:~:text=" +
     encodeURIComponent(d.hl[0]) + "," + encodeURIComponent(d.hl[1]);
 }
 function fallback(text){
