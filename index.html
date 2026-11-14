@@ -1,0 +1,241 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>一週讀經</title>
+<meta name="description" content="一週六天的生命讀經閱讀範圍與恢復本經節">
+<meta property="og:title" content="一週讀經">
+<meta property="og:description" content="每天的閱讀範圍、經節和生命讀經連結">
+<style>
+:root{
+  --bg:#f7f5f0; --card:#ffffff; --ink:#24211c; --muted:#6f685c; --line:#e4dfd4;
+  --accent:#7a4a2a; --accent-ink:#ffffff; --soft:#f1ebe1; --verse:#3a352d;
+  --fs:18px;
+}
+@media (prefers-color-scheme: dark){
+  :root{
+    --bg:#17161a; --card:#211f24; --ink:#ece8e1; --muted:#a59e92; --line:#35323a;
+    --accent:#d8a47a; --accent-ink:#1b1714; --soft:#2a272d; --verse:#ddd6ca;
+  }
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);
+  font-family:"PingFang TC","Noto Sans TC","Microsoft JhengHei",system-ui,sans-serif;
+  font-size:var(--fs);line-height:1.75}
+.wrap{max-width:680px;margin:0 auto;padding:16px 16px 96px}
+header h1{font-size:1.15em;margin:4px 0 2px}
+header p{margin:0;color:var(--muted);font-size:.8em}
+nav{position:sticky;top:0;z-index:5;background:var(--bg);margin:12px -16px 0;padding:10px 16px;
+  border-bottom:1px solid var(--line);display:grid;grid-template-columns:repeat(6,1fr);gap:6px}
+nav button{font:inherit;font-size:.8em;padding:8px 0;border:1px solid var(--line);border-radius:10px;
+  background:var(--card);color:var(--ink);cursor:pointer}
+nav button.on{background:var(--accent);color:var(--accent-ink);border-color:var(--accent);font-weight:700}
+nav button .t{display:block;font-size:.75em;opacity:.75;line-height:1.2}
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:18px;margin-top:16px}
+.day{color:var(--accent);font-weight:700;font-size:.85em;letter-spacing:.05em}
+.ref{font-size:.85em;color:var(--muted)}
+h2{font-size:1.05em;margin:6px 0 0;line-height:1.5}
+.range{margin-top:14px;background:var(--soft);border-radius:12px;padding:12px 14px}
+.range div{display:flex;gap:8px}
+.range b{flex:none;color:var(--accent)}
+.range .note{color:var(--muted);font-size:.8em;margin-top:4px}
+h3{font-size:.9em;margin:20px 0 6px;color:var(--muted);font-weight:600}
+.v{margin:0 0 10px;color:var(--verse);font-family:"BiauKai","DFKai-SB","標楷體","Kaiti TC","Noto Serif TC",serif}
+.v span{display:inline-block;min-width:4.6em;font-family:"PingFang TC","Noto Sans TC","Microsoft JhengHei",sans-serif;
+  font-size:.8em;color:var(--accent);font-weight:700}
+a.go{display:block;text-align:center;margin-top:18px;padding:14px;border-radius:12px;background:var(--accent);
+  color:var(--accent-ink);text-decoration:none;font-weight:700}
+.tip{color:var(--muted);font-size:.75em;text-align:center;margin-top:8px}
+.size{position:fixed;right:16px;bottom:16px;display:flex;gap:6px;z-index:6}
+.size button{font:inherit;font-size:15px;width:44px;height:44px;border-radius:50%;border:1px solid var(--line);
+  background:var(--card);color:var(--ink);box-shadow:0 2px 8px rgba(0,0,0,.12);cursor:pointer}
+.copy{font:inherit;font-size:.75em;margin-top:10px;padding:6px 12px;border-radius:8px;border:1px solid var(--line);
+  background:transparent;color:var(--muted);cursor:pointer}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1 id="title">一週讀經</h1>
+    <p id="sub"></p>
+  </header>
+  <nav id="tabs"></nav>
+  <main id="main"></main>
+</div>
+<div class="size" aria-label="字體大小">
+  <button type="button" id="smaller" aria-label="字體縮小">A-</button>
+  <button type="button" id="bigger" aria-label="字體放大">A+</button>
+</div>
+
+<script>
+/* ===== 每週只要改這裡 ===== */
+var WEEK = {
+  title: "一週讀經",
+  sub: "腓立比書生命讀經　第四十～四十一篇",
+  days: [
+    {
+      ref: "西三16",
+      piece: "第四十篇　藉著接受神的話，有分於那靈全備的供應，並享受基督的豐富（二）",
+      from: "從開頭「歌羅西三章十六節說」開始",
+      to: "讀到「…我們也可以藉著歌唱來教導並勸戒」為止",
+      note: "標題「向主歌唱」之前",
+      url: "https://line.twgbr.org/life-study/50_40.html",
+      verses: [
+        ["西3:16","當用各樣的智慧，讓基督的話豐豐富富的住在你們裏面，用詩章、頌辭、靈歌，彼此教導，互相勸戒，心被恩感歌頌神；"]
+      ]
+    },
+    {
+      ref: "西三16",
+      piece: "第四十篇　藉著接受神的話，有分於那靈全備的供應，並享受基督的豐富（二）",
+      from: "從標題「向主歌唱」開始",
+      to: "讀到「…要接受生命的話，並且被基督的元素所浸透，上好的路就是唱神的話」為止",
+      note: "標題「在靈裡被充滿」之前",
+      url: "https://line.twgbr.org/life-study/50_40.html#O4",
+      verses: [
+        ["西3:16","當用各樣的智慧，讓基督的話豐豐富富的住在你們裏面，用詩章、頌辭、靈歌，彼此教導，互相勸戒，心被恩感歌頌神；"]
+      ]
+    },
+    {
+      ref: "弗五18～19，腓一19～21",
+      piece: "第四十篇　藉著接受神的話，有分於那靈全備的供應，並享受基督的豐富（二）",
+      from: "從標題「在靈裡被充滿」開始",
+      to: "讀到本篇末了",
+      note: "",
+      url: "https://line.twgbr.org/life-study/50_40.html#O6",
+      verses: [
+        ["弗5:18","不要醉酒，醉酒使人放蕩，乃要在靈裏被充滿，"],
+        ["弗5:19","用詩章、頌辭、靈歌，彼此對說，從心中向主歌唱、頌詠，"],
+        ["腓1:19","因為我知道，這事藉着你們的祈求，和耶穌基督之靈全備的供應，終必叫我得救。"],
+        ["腓1:20","這是照着我所專切期待並盼望的，就是沒有一事會叫我羞愧，只要凡事放膽，無論是生，是死，總叫基督在我身體上，現今也照常顯大，"],
+        ["腓1:21","因為在我，活着就是基督，死了就有益處。"]
+      ]
+    },
+    {
+      ref: "弗三8，16～17上，19下，西三16",
+      piece: "第四十一篇　基督藉著祂的話住在我們裡面而安家在我們裡面",
+      from: "從開頭「以上所列的經節」開始",
+      to: "讀到「…我們需要話作身體，靈作生命」為止",
+      note: "標題「話與靈」第四段「我們若要讓基督佔有我們」之前",
+      url: "https://line.twgbr.org/life-study/50_41.html",
+      verses: [
+        ["弗3:8","這恩典賜給了我這比眾聖徒中最小者還小的，叫我將基督那追測不盡的豐富，當作福音傳給外邦人，"],
+        ["弗3:16","願祂照着祂榮耀的豐富，藉着祂的靈，用大能使你們得以加強到裏面的人裏，"],
+        ["弗3:17上","使基督藉着信，安家在你們心裏。"],
+        ["弗3:19下","使你們被充滿，成為神一切的豐滿。"],
+        ["西3:16","當用各樣的智慧，讓基督的話豐豐富富的住在你們裏面，用詩章、頌辭、靈歌，彼此教導，互相勸戒，心被恩感歌頌神；"]
+      ]
+    },
+    {
+      ref: "約十四23，十五4，7，西三16",
+      piece: "第四十一篇　基督藉著祂的話住在我們裡面而安家在我們裡面",
+      from: "從標題「話與靈」第四段「我們若要讓基督佔有我們」開始",
+      to: "讀到「…甚至用我們自己作的自來調」為止",
+      note: "標題「歌唱基督的話」之前",
+      url: "https://line.twgbr.org/life-study/50_41.html#O1",
+      verses: [
+        ["約14:23","耶穌回答說，人若愛我，就必遵守我的話，我父也必愛他，並且我們要到他那裏去，同他安排住處。"],
+        ["約15:4","你們要住在我裏面，我也住在你們裏面。枝子若不住在葡萄樹上，自己就不能結果子，你們若不住在我裏面，也是這樣。"],
+        ["約15:7","你們若住在我裏面，我的話也住在你們裏面，凡你們所願意的，祈求就給你們成就。"],
+        ["西3:16","當用各樣的智慧，讓基督的話豐豐富富的住在你們裏面，用詩章、頌辭、靈歌，彼此教導，互相勸戒，心被恩感歌頌神；"]
+      ]
+    },
+    {
+      ref: "弗六17下～18上，西三16，腓二16上",
+      piece: "第四十一篇　基督藉著祂的話住在我們裡面而安家在我們裡面",
+      from: "從標題「歌唱基督的話」開始",
+      to: "讀到本篇末了",
+      note: "",
+      url: "https://line.twgbr.org/life-study/50_41.html#O3",
+      verses: [
+        ["弗6:17下","並那靈的劍，那靈就是神的話；"],
+        ["弗6:18上","時時在靈裏禱告，並盡力堅持。"],
+        ["西3:16","當用各樣的智慧，讓基督的話豐豐富富的住在你們裏面，用詩章、頌辭、靈歌，彼此教導，互相勸戒，心被恩感歌頌神；"],
+        ["腓2:16上","將生命的話表明出來，"]
+      ]
+    }
+  ]
+};
+/* ===== 以下不用改 ===== */
+
+var WEEKDAY = ["週一","週二","週三","週四","週五","週六"];
+function esc(s){return String(s).replace(/[&<>"]/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c];});}
+
+document.getElementById("title").textContent = WEEK.title;
+document.getElementById("sub").textContent = WEEK.sub;
+document.title = WEEK.title;
+
+var tabs = document.getElementById("tabs");
+WEEK.days.forEach(function(d,i){
+  var b = document.createElement("button");
+  b.type = "button";
+  b.innerHTML = "Day" + (i+1) + '<span class="t">' + WEEKDAY[i] + "</span>";
+  b.onclick = function(){
+    show(i);
+    try { history.replaceState(null, "", "#d" + (i+1)); } catch(e){}
+  };
+  tabs.appendChild(b);
+});
+
+function show(i){
+  var d = WEEK.days[i];
+  [].forEach.call(tabs.children,function(b,j){ b.className = j===i ? "on" : ""; });
+  var verses = d.verses.map(function(v){
+    return '<p class="v"><span>' + esc(v[0]) + "</span>" + esc(v[1]) + "</p>";
+  }).join("");
+  document.getElementById("main").innerHTML =
+    '<section class="card">' +
+      '<div class="day">Day' + (i+1) + "　" + WEEKDAY[i] + '　<span class="ref">' + esc(d.ref) + "</span></div>" +
+      "<h2>" + esc(d.piece) + "</h2>" +
+      '<div class="range">' +
+        "<div><b>▶</b><span>" + esc(d.from) + "</span></div>" +
+        "<div><b>■</b><span>" + esc(d.to) + "</span></div>" +
+        (d.note ? '<div class="note">（' + esc(d.note) + "）</div>" : "") +
+      "</div>" +
+      "<h3>經節（恢復本）</h3>" + verses +
+      '<button type="button" class="copy" id="copy">複製經節</button>' +
+      '<a class="go" href="' + esc(d.url) + '">開始閱讀生命讀經 →</a>' +
+      '<p class="tip">會直接跳到今天開始的地方，頁面下方也有 A+／A- 和音訊</p>' +
+    "</section>";
+  document.getElementById("copy").onclick = function(){
+    var text = "Day" + (i+1) + "｜" + d.ref + "\n" + d.verses.map(function(v){return v[0] + "　" + v[1];}).join("\n");
+    var btn = this;
+    function done(){ btn.textContent = "已複製"; setTimeout(function(){btn.textContent="複製經節";},1500); }
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text).then(done, function(){ fallback(text); done(); });
+    } else { fallback(text); done(); }
+  };
+  window.scrollTo(0,0);
+}
+function fallback(text){
+  var t = document.createElement("textarea");
+  t.value = text; t.style.position = "fixed"; t.style.opacity = "0";
+  document.body.appendChild(t); t.select();
+  try{ document.execCommand("copy"); }catch(e){}
+  document.body.removeChild(t);
+}
+
+function pick(){
+  var m = /^#d([1-6])$/.exec(location.hash);
+  if (m) return +m[1] - 1;
+  var wd = new Date().getDay();           /* 0=週日 */
+  return (wd >= 1 && wd <= 6) ? wd - 1 : 0; /* 週日顯示 Day1 */
+}
+window.addEventListener("hashchange", function(){ show(pick()); });
+show(pick());
+
+/* 字體大小（記在這支手機上） */
+var fs = 18;
+try { var saved = +localStorage.getItem("wr-fs"); if (saved >= 14 && saved <= 30) fs = saved; } catch(e){}
+function setFs(n){
+  fs = Math.max(14, Math.min(30, n));
+  document.documentElement.style.setProperty("--fs", fs + "px");
+  try { localStorage.setItem("wr-fs", fs); } catch(e){}
+}
+setFs(fs);
+document.getElementById("bigger").onclick = function(){ setFs(fs + 2); };
+document.getElementById("smaller").onclick = function(){ setFs(fs - 2); };
+</script>
+</body>
+</html>
