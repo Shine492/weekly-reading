@@ -54,14 +54,20 @@ h3{font-size:.9em;margin:20px 0 6px;color:var(--muted);font-weight:600}
 .v{margin:0 0 10px;color:var(--verse);font-family:"BiauKai","DFKai-SB","標楷體","Kaiti TC","Noto Serif TC",serif}
 .v span{display:inline-block;min-width:4.6em;font-family:"PingFang TC","Noto Sans TC","Microsoft JhengHei",sans-serif;
   font-size:.8em;color:var(--accent);font-weight:700}
-a.go{display:block;text-align:center;margin-top:18px;padding:14px;border-radius:12px;background:var(--accent);
-  color:var(--accent-ink);text-decoration:none;font-weight:700}
-.tip{color:var(--muted);font-size:.75em;text-align:center;margin-top:8px}
 .reader{margin-top:16px;background:var(--card);border:1px solid var(--line);border-radius:16px;overflow:hidden}
 .reader-bar{display:flex;justify-content:space-between;align-items:center;padding:12px 16px;border-bottom:1px solid var(--line)}
 .reader-bar b{color:var(--accent);font-size:.9em}
 .reader-bar a{color:var(--accent);font-size:.8em;text-decoration:none}
 .reader iframe{display:block;width:100%;height:calc(100vh - 120px);height:calc(100dvh - 120px);min-height:420px;border:0;background:#fff}
+a.go{display:block;margin-top:16px;padding:16px 18px;border-radius:16px;background:var(--accent);color:var(--accent-ink);
+  text-decoration:none;box-shadow:0 4px 14px rgba(122,74,42,.25)}
+.go-t{display:block;font-weight:700;font-size:1.05em}
+.go-t::after{content:" →"}
+.go-s{display:block;font-size:.75em;opacity:.85;margin-top:2px;line-height:1.5}
+.stop{display:flex;gap:10px;align-items:flex-start;padding:10px 16px;background:var(--soft);font-size:.85em;border-bottom:1px solid var(--line)}
+.stop .mk{flex:none;width:24px;height:24px;border-radius:50%;border:2px solid var(--accent);color:var(--accent);
+  display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;background:var(--card)}
+.stop small{display:block;color:var(--muted);font-size:.85em}
 .fallback{display:block;padding:12px 16px;font-size:.8em;color:var(--accent);text-decoration:none;border-top:1px solid var(--line);text-align:center}
 .vs{margin-top:16px}
 .vs h3{margin:0 0 8px}
@@ -102,6 +108,7 @@ var WEEK = {
       to: "讀到「…我們也可以藉著歌唱來教導並勸戒」為止",
       note: "標題「向主歌唱」之前",
       url: "https://line.twgbr.org/life-study/50_40.html",
+      hl: ["歌羅西三章十六節說", "我們也可以藉著歌唱來教導並勸戒"],
       verses: [
         ["西3:16","當用各樣的智慧，讓基督的話豐豐富富的住在你們裏面，用詩章、頌辭、靈歌，彼此教導，互相勸戒，心被恩感歌頌神；"]
       ]
@@ -113,6 +120,7 @@ var WEEK = {
       to: "讀到「…要接受生命的話，並且被基督的元素所浸透，上好的路就是唱神的話」為止",
       note: "標題「在靈裡被充滿」之前",
       url: "https://line.twgbr.org/life-study/50_40.html#O4",
+      hl: ["向主歌唱", "上好的路就是唱神的話"],
       verses: [
         ["西3:16","當用各樣的智慧，讓基督的話豐豐富富的住在你們裏面，用詩章、頌辭、靈歌，彼此教導，互相勸戒，心被恩感歌頌神；"]
       ]
@@ -124,6 +132,7 @@ var WEEK = {
       to: "讀到本篇末了",
       note: "",
       url: "https://line.twgbr.org/life-study/50_40.html#O6",
+      hl: ["在靈裡被充滿", "並活出我們所吸收的"],
       verses: [
         ["弗5:18","不要醉酒，醉酒使人放蕩，乃要在靈裏被充滿，"],
         ["弗5:19","用詩章、頌辭、靈歌，彼此對說，從心中向主歌唱、頌詠，"],
@@ -139,6 +148,7 @@ var WEEK = {
       to: "讀到「…我們需要話作身體，靈作生命」為止",
       note: "標題「話與靈」第四段「我們若要讓基督佔有我們」之前",
       url: "https://line.twgbr.org/life-study/50_41.html",
+      hl: ["以上所列的經節", "我們需要話作身體，靈作生命"],
       verses: [
         ["弗3:8","這恩典賜給了我這比眾聖徒中最小者還小的，叫我將基督那追測不盡的豐富，當作福音傳給外邦人，"],
         ["弗3:16","願祂照着祂榮耀的豐富，藉着祂的靈，用大能使你們得以加強到裏面的人裏，"],
@@ -154,6 +164,7 @@ var WEEK = {
       to: "讀到「…甚至用我們自己作的自來調」為止",
       note: "標題「歌唱基督的話」之前",
       url: "https://line.twgbr.org/life-study/50_41.html#O1",
+      hl: ["我們若要讓基督佔有我們", "甚至用我們自己作的自來調"],
       verses: [
         ["約14:23","耶穌回答說，人若愛我，就必遵守我的話，我父也必愛他，並且我們要到他那裏去，同他安排住處。"],
         ["約15:4","你們要住在我裏面，我也住在你們裏面。枝子若不住在葡萄樹上，自己就不能結果子，你們若不住在我裏面，也是這樣。"],
@@ -168,6 +179,7 @@ var WEEK = {
       to: "讀到本篇末了",
       note: "",
       url: "https://line.twgbr.org/life-study/50_41.html#O3",
+      hl: ["歌唱基督的話", "好藉著那靈接受主話的豐富"],
       verses: [
         ["弗6:17下","並那靈的劍，那靈就是神的話；"],
         ["弗6:18上","時時在靈裏禱告，並盡力堅持。"],
@@ -221,11 +233,16 @@ function show(i){
         '<button type="button" class="copy" id="copy">複製經節</button>' +
       "</div>" +
     "</section>" +
+    '<a class="go" href="' + esc(hlUrl(d)) + '">' +
+      '<span class="go-t">開始閱讀今天的範圍</span>' +
+      '<span class="go-s">今天要讀的段落會整段標上顏色，顏色結束就是停的地方</span></a>' +
     '<section class="reader" id="reader">' +
-      '<div class="reader-bar"><b>今日生命讀經</b>' +
-        '<a href="' + esc(d.url) + '">全螢幕開啟 ↗</a></div>' +
+      '<div class="reader-bar"><b>今日生命讀經（預覽）</b>' +
+        '<a href="' + esc(hlUrl(d)) + '">全螢幕・標色 ↗</a></div>' +
+      '<div class="stop"><span class="mk">止</span><span>讀到「' + esc(d.hl ? d.hl[1] : d.to) + '」就停' +
+        (d.note ? "<small>" + esc(d.note) + "</small>" : "") + "</span></div>" +
       '<iframe src="' + esc(d.url) + '" title="生命讀經"></iframe>' +
-      '<a class="fallback" href="' + esc(d.url) + '">上面沒有出現內容？點這裡開啟生命讀經 →</a>' +
+      '<a class="fallback" href="' + esc(hlUrl(d)) + '">預覽視窗不會標顏色，要看標好的範圍請點這裡 →</a>' +
     "</section>";
   document.getElementById("copy").onclick = function(){
     var text = "Day" + (i+1) + "｜" + d.ref + "\n" + d.verses.map(function(v){return v[0] + "　" + v[1];}).join("\n");
@@ -236,6 +253,12 @@ function show(i){
     } else { fallback(text); done(); }
   };
   window.scrollTo(0,0);
+}
+/* 打開生命讀經時用「文字片段」把今天的範圍整段標色（Chrome、Safari 支援） */
+function hlUrl(d){
+  if (!d.hl) return d.url;
+  return d.url.split("#")[0] + "#:~:text=" +
+    encodeURIComponent(d.hl[0]) + "," + encodeURIComponent(d.hl[1]);
 }
 function fallback(text){
   var t = document.createElement("textarea");
