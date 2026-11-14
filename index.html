@@ -179,7 +179,7 @@ var WEEK = {
 };
 /* ===== 以下不用改 ===== */
 
-var WEEKDAY = ["週一","週二","週三","週四","週五","週六"];
+var LAST_KEY = "wr-last:" + WEEK.sub;
 function esc(s){return String(s).replace(/[&<>"]/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c];});}
 
 document.getElementById("title").textContent = WEEK.title;
@@ -190,7 +190,7 @@ var tabs = document.getElementById("tabs");
 WEEK.days.forEach(function(d,i){
   var b = document.createElement("button");
   b.type = "button";
-  b.innerHTML = "Day" + (i+1) + '<span class="t">' + WEEKDAY[i] + "</span>";
+  b.textContent = "Day" + (i+1);
   b.onclick = function(){
     show(i);
     try { history.replaceState(null, "", "#d" + (i+1)); } catch(e){}
@@ -200,13 +200,14 @@ WEEK.days.forEach(function(d,i){
 
 function show(i){
   var d = WEEK.days[i];
+  try { localStorage.setItem(LAST_KEY, String(i)); } catch(e){}
   [].forEach.call(tabs.children,function(b,j){ b.className = j===i ? "on" : ""; });
   var verses = d.verses.map(function(v){
     return '<p class="v"><span>' + esc(v[0]) + "</span>" + esc(v[1]) + "</p>";
   }).join("");
   document.getElementById("main").innerHTML =
     '<section class="card">' +
-      '<div class="day">Day' + (i+1) + "　" + WEEKDAY[i] + '　<span class="ref">' + esc(d.ref) + "</span></div>" +
+      '<div class="day">Day' + (i+1) + '　<span class="ref">' + esc(d.ref) + "</span></div>" +
       "<h2>" + esc(d.piece) + "</h2>" +
       '<div class="range">' +
         '<div class="step s"><span class="mk">起</span><span class="tx"><span class="lb">從這裡開始</span>' +
@@ -247,8 +248,12 @@ function fallback(text){
 function pick(){
   var m = /^#d([1-6])$/.exec(location.hash);
   if (m) return +m[1] - 1;
-  var wd = new Date().getDay();           /* 0=週日 */
-  return (wd >= 1 && wd <= 6) ? wd - 1 : 0; /* 週日顯示 Day1 */
+  /* 沒指定哪一天：回到這支手機上次看的那一天（換新一週就從 Day1 開始） */
+  try {
+    var last = +localStorage.getItem(LAST_KEY);
+    if (last >= 0 && last < WEEK.days.length) return last;
+  } catch(e){}
+  return 0;
 }
 window.addEventListener("hashchange", function(){ show(pick()); });
 show(pick());
